@@ -1,0 +1,8 @@
+name = "ainovel-queue-test"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+
+[[queues.consumers]]
+queue = "ainovel-queue-test-only"
+max_batch_size = 1
+max_batch_timeout = 5

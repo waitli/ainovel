@@ -1,0 +1,66 @@
+name = "ainovel-orchestrator"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ainovel-db"
+database_id = "2bb0a27e-24e3-49c0-be94-349b6a7b0266"
+
+[[r2_buckets]]
+binding = "R2_CORE"
+bucket_name = "ainovel-core"
+
+[[r2_buckets]]
+binding = "R2_CHAPTERS"
+bucket_name = "ainovel-chapters"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "a9f3eac236c448c48d1b6ef6d114e53a"
+
+# AI 模型配置 (非敏感参数，可自定义)
+AI_BASE_URL = "https://cpa.waitli.top/v1/chat/completions"
+AI_MODEL = "gpt-5.4-mini"
+
+# AI_API_KEY 存储在 Wrangler Secrets 中，绝不在配置文件明文
+# 设置方式: npx wrangler secret put AI_API_KEY
+
+# 封面图生成配置 (Doubao Images)
+# 注意:
+# 1) COVER_API_KEY 为可选 Secret，若未设置则回退使用 AI_API_KEY
+# 2) URL / MODEL 都可按需替换
+COVER_BASE_URL = "https://ark.cn-beijing.volces.com/api/v3/images/generations"
+COVER_MODEL = "doubao-seedream-4-5-251128"
+COVER_SIZE = "2K"
+COVER_WATERMARK = "true"
+COVER_RESPONSE_FORMAT = "url"
+
+# 可选：单独设置封面模型密钥 (推荐，避免和文本模型混用)
+# npx wrangler secret put COVER_API_KEY
+
+# Queue 消费者 — 监听初始化/续章两个队列
+[[queues.consumers]]
+queue = "ainovel-book-init"
+max_batch_size = 1
+max_batch_timeout = 30
+
+[[queues.consumers]]
+queue = "ainovel-next-chapter"
+max_batch_size = 1
+max_batch_timeout = 30
+
+# 定时触发 — 检查投票是否达标
+# TEMP DISABLED: Queue consumer 和 [triggers] 不能同时存在
+# [triggers]
+# crons = ["*/5 * * * *"]
+
+# Vectorize — 语义搜索
+[[vectorize]]
+binding = "VECTORIZE"
+index_name = "ainovel-vectors"
+
+# Workers AI — Embedding 模型
+[ai]
+binding = "AI"

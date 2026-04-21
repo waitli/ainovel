@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "AI Novel",
+    "slug": "ainovel",
+    "version": "1.0.0",
+    "scheme": "ainovel",
+    "platforms": ["ios", "android", "web"],
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-localization"
+    ],
+    "extra": {
+      "apiBase": "https://ainovel-api.waitli.workers.dev/api/v1"
+    }
+  }
+}

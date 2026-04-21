@@ -1,0 +1,37 @@
+{
+  "name": "ainovel-platform",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev:api": "cd workers/api-gateway && npx wrangler dev",
+    "dev:auth": "cd workers/auth && npx wrangler dev",
+    "dev:submission": "cd workers/submission && npx wrangler dev",
+    "dev:voting": "cd workers/voting && npx wrangler dev",
+    "dev:character": "cd workers/character && npx wrangler dev",
+    "dev:reading": "cd workers/reading && npx wrangler dev",
+    "dev:orchestrator": "cd workers/orchestrator && npx wrangler dev",
+    "dev:frontend": "cd frontend && npx vite dev",
+    "deploy:api": "cd workers/api-gateway && npx wrangler deploy",
+    "deploy:auth": "cd workers/auth && npx wrangler deploy",
+    "deploy:submission": "cd workers/submission && npx wrangler deploy",
+    "deploy:voting": "cd workers/voting && npx wrangler deploy",
+    "deploy:character": "cd workers/character && npx wrangler deploy",
+    "deploy:reading": "cd workers/reading && npx wrangler deploy",
+    "deploy:orchestrator": "cd workers/orchestrator && npx wrangler deploy",
+    "deploy:frontend": "cd frontend && npx wrangler pages deploy dist",
+    "db:create": "npx wrangler d1 create ainovel-db",
+    "db:migrate:local": "npx wrangler d1 execute ainovel-db --local --file=schema/d1-schema.sql",
+    "db:migrate:remote": "npx wrangler d1 execute ainovel-db --remote --file=schema/d1-schema.sql",
+    "queue:create:init": "npx wrangler queues create ainovel-book-init",
+    "queue:create:chapter": "npx wrangler queues create ainovel-next-chapter",
+    "r2:create:core": "npx wrangler r2 bucket create ainovel-core",
+    "r2:create:chapters": "npx wrangler r2 bucket create ainovel-chapters",
+    "kv:create": "npx wrangler kv namespace create ainovel-cache",
+    "deploy": "wrangler deploy",
+    "preview": "wrangler dev"
+  },
+  "devDependencies": {
+    "wrangler": "^4.82.2"
+  }
+}

@@ -1,0 +1,39 @@
+name = "ainovel-voting"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ainovel-db"
+database_id = "2bb0a27e-24e3-49c0-be94-349b6a7b0266"
+
+[[r2_buckets]]
+binding = "R2_CORE"
+bucket_name = "ainovel-core"
+
+[[r2_buckets]]
+binding = "R2_CHAPTERS"
+bucket_name = "ainovel-chapters"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "a9f3eac236c448c48d1b6ef6d114e53a"
+
+[vars]
+VOTE_THRESHOLD = "1"
+
+# Durable Objects — 实时投票计数
+[[durable_objects.bindings]]
+name = "VOTE_COUNTER"
+class_name = "VoteCounter"
+
+# Queue — 投票达标后触发下一章生成
+[[queues.producers]]
+binding = "CHAPTER_QUEUE"
+queue = "ainovel-next-chapter"
+
+# DO migrations (SQLite required for free plan)
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["VoteCounter"]

@@ -1,0 +1,34 @@
+name = "ainovel-submission"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+# D1 数据库绑定
+[[d1_databases]]
+binding = "DB"
+database_name = "ainovel-db"
+database_id = "2bb0a27e-24e3-49c0-be94-349b6a7b0266"
+
+# R2 桶绑定
+[[r2_buckets]]
+binding = "R2_CORE"
+bucket_name = "ainovel-core"
+
+[[r2_buckets]]
+binding = "R2_CHAPTERS"
+bucket_name = "ainovel-chapters"
+
+# KV 缓存
+[[kv_namespaces]]
+binding = "KV"
+id = "a9f3eac236c448c48d1b6ef6d114e53a"
+
+# 环境变量
+
+# AI 审核配置
+AI_BASE_URL = "https://cpa.waitli.top/v1/chat/completions"
+
+# Queue — 投稿审批通过后，发送初始化任务
+[[queues.producers]]
+binding = "ORCHESTRATOR_QUEUE"
+queue = "ainovel-book-init"

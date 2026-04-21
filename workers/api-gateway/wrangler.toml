@@ -1,0 +1,29 @@
+name = "ainovel-api"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+# 服务绑定 — 把请求路由到各个子 Worker
+[[services]]
+binding = "AUTH_SERVICE"
+service = "ainovel-auth"
+
+[[services]]
+binding = "SUBMISSION_SERVICE"
+service = "ainovel-submission"
+
+[[services]]
+binding = "VOTING_SERVICE"
+service = "ainovel-voting"
+
+[[services]]
+binding = "CHARACTER_SERVICE"
+service = "ainovel-character"
+
+[[services]]
+binding = "READING_SERVICE"
+service = "ainovel-reading"
+
+[[services]]
+binding = "ORCHESTRATOR_SERVICE"
+service = "ainovel-orchestrator"

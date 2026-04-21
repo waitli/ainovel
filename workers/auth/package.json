@@ -1,0 +1,9 @@
+{
+  "name": "@ainovel/worker-auth",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@ainovel/shared": "workspace:*"
+  }
+}
